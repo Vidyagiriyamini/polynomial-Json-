@@ -2,11 +2,10 @@ function decodeValue(base, value) {
     return parseInt(value, base);
 }
 
-// Function to perform Lagrange interpolation to find the constant term
+
 function lagrangeInterpolation(points) {
     const k = points.length;
 
-    // Lagrange basis polynomial L_i(0) for each point
     function basis(i) {
         let numerator = 1;
         let denominator = 1;
@@ -21,7 +20,6 @@ function lagrangeInterpolation(points) {
         return numerator / denominator;
     }
 
-    // Calculate the constant term f(0)
     let constantTerm = 0;
     for (let i = 0; i < k; i++) {
         const [_, y_i] = points[i];
@@ -29,14 +27,11 @@ function lagrangeInterpolation(points) {
     }
     return constantTerm;
 }
-
-// Function to solve the given input JSON
 function solve(input) {
     const keys = input.keys;
     const n = keys.n;
     const k = keys.k;
 
-    // Gather the first k points
     let points = [];
     for (let key in input) {
         if (key !== "keys") {
@@ -53,12 +48,10 @@ function solve(input) {
         }
     }
 
-    // Find the constant term using Lagrange interpolation
     const constantTerm = lagrangeInterpolation(points);
     return constantTerm;
 }
 
-// Sample input as a JavaScript object (this would come from JSON in a real use case)
 const input = {
     "keys": {
         "n": 9,
@@ -102,6 +95,5 @@ const input = {
     }
 };
 
-// Execute the function and print the result
 const result = solve(input);
 console.log(`The constant term is: ${result}`);
